@@ -1,0 +1,89 @@
+\usefonttheme{serif}
+% \geometry{paperwidth=140mm,paperheight=105mm}
+
+\RequirePackage[no-math]{fontspec}
+\setmainfont{texgyretermes}[
+  UprightFont = *-regular ,
+  BoldFont = *-bold ,
+  ItalicFont = *-italic ,
+  BoldItalicFont = *-bolditalic ,
+  Extension = .otf ,
+  Scale = 1.0]
+  
+\setsansfont{texgyreheros}[
+  UprightFont = *-regular ,
+  BoldFont = *-bold ,
+  ItalicFont = *-italic ,
+  BoldItalicFont = *-bolditalic ,
+  Extension = .otf ,
+  Scale = 0.9]
+
+\RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+\setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+\setCJKfamilyfont{zhhei}{FZHei-B01}
+\setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+\newcommand*{\songti}{\CJKfamily{zhsong}}
+\newcommand*{\heiti}{\CJKfamily{zhhei}}
+\newcommand*{\kaishu}{\CJKfamily{zhkai}}
+\newcommand*{\fangsong}{\CJKfamily{zhfs}}
+
+\usepackage{anyfontsize}
+\usepackage[english]{babel}
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\normalfont\bfseries}
+\usepackage{amsmath,amssymb}
+\usepackage{bookmark}
+
+\usetheme[sectionpage=none]{metropolis}
+\setlength\abovecaptionskip{-1pt}
+\setlength\belowcaptionskip{-1pt}
+% adjust the space between caption and figure and table
+% source: https://tex.stackexchange.com/questions/197879/how-to-adjust-spacing-between-caption-and-table-figure-in-beamer
+\usefonttheme{professionalfonts}
+\titlegraphic{\includegraphics[width=1cm]{logo.png}}
+
+
+\setbeamerfont{normal text}{family=\kaishu\sffamily}
+\setbeamerfont{frametitle}{family=\large\bfseries\sffamily}
+\setbeamerfont{title}{family=\bfseries}
+\setbeamerfont{subtitle}{family=\kaishu}
+\setbeamerfont{institute}{size=\small}
+\definecolor{iron}{RGB}{0,82,67}
+\setbeamercolor{frametitle}{bg=iron}
+\setbeamercolor{progress bar}{fg=iron,bg=iron}
+
+
+\setbeamertemplate{section in toc}[ball unnumbered]
+\setbeamerfont{section in toc}{family=\heiti\sffamily}
+\setbeamerfont{myTOC}{}
+\AtBeginSection[]{\frame{\frametitle{目录}%
+                  \usebeamerfont{myTOC}\tableofcontents[current]}}
+
+\setcounter{tocdepth}{1}
+\makeatletter
+\setbeamertemplate{frametitle}[default][left,leftskip=\the\dimexpr\beamer@leftmargin-0.6cm\relax]
+\makeatother
+
+
+\setbeamertemplate{footline}
+{%
+   \leavevmode%
+ \hskip1cm \fangsong \insertshortauthor \quad|\quad \insertshorttitle \hfill \normalfont  \insertframenumber\,/\,\inserttotalframenumber  \hskip1cm \hfill
+   \vskip6pt%
+}
+
+\graphicspath{{image/}{figure/}{fig/}{img/}}
+\usepackage{booktabs}
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape}
+\let\scshape\relax
+\usepackage{type1cm}
+\AtBeginDocument{\usebeamerfont{normal text}}
+
+\newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
+\renewcommand\ttdefault{lmtt}
