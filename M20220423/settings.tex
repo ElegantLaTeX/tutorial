@@ -1,24 +1,32 @@
-\usefonttheme{serif}
+% \usefonttheme{serif}
 % \geometry{paperwidth=140mm,paperheight=105mm}
 
 \RequirePackage[no-math]{fontspec}
-\setmainfont{texgyretermes}[
-  UprightFont = *-regular ,
-  BoldFont = *-bold ,
-  ItalicFont = *-italic ,
-  BoldItalicFont = *-bolditalic ,
-  Extension = .otf ,
-  Scale = 1.0]
+% \setmainfont{texgyretermes}[
+%   UprightFont = *-regular ,
+%   BoldFont = *-bold ,
+%   ItalicFont = *-italic ,
+%   BoldItalicFont = *-bolditalic ,
+%   Extension = .otf ,
+%   Scale = 1.0]
   
-\setsansfont{texgyreheros}[
-  UprightFont = *-regular ,
-  BoldFont = *-bold ,
-  ItalicFont = *-italic ,
-  BoldItalicFont = *-bolditalic ,
-  Extension = .otf ,
-  Scale = 0.9]
+% \setsansfont{texgyreheros}[
+%   UprightFont = *-regular ,
+%   BoldFont = *-bold ,
+%   ItalicFont = *-italic ,
+%   BoldItalicFont = *-bolditalic ,
+%   Extension = .otf ,
+%   Scale = 0.9]
 
+% \setmonofont{cmun}[
+%   UprightFont = *tt ,
+%   BoldFont    = *tb ,
+%   ItalicFont  = *it ,
+%   BoldItalicFont = *tx,
+%   Extension   = .otf ,
+% ]
 \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+\usepackage{xeCJKfntef}
 \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
 \setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
 \setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
@@ -30,6 +38,7 @@
 \newcommand*{\heiti}{\CJKfamily{zhhei}}
 \newcommand*{\kaishu}{\CJKfamily{zhkai}}
 \newcommand*{\fangsong}{\CJKfamily{zhfs}}
+\renewcommand{\emph}{\CJKunderline}
 
 \usepackage{anyfontsize}
 \usepackage[english]{babel}
@@ -87,3 +96,56 @@
 \newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
 \renewcommand\ttdefault{lmtt}
+
+\usepackage[]{listings}
+\usepackage{MnSymbol}
+\usepackage[]{ninecolors}
+\lstset{
+  basicstyle  = \small\ttfamily,
+  breaklines,
+  % breakatwhitespace,
+  prebreak    = {\mbox{$ \rhookswarrow $}},
+  postbreak   = {\mbox{$ \lhookrightarrow $\quad}},
+  breakindent = 10pt,
+}
+\lstdefinelanguage{cmd}{
+  morekeywords  = [1]
+    {
+      tlmgr, pdflatex, latexmk, xelatex, cd, dir, mkdir, 
+      ls, del, rm, mv, move, cp, copy, code
+    },
+  morekeywords  = [2]{action, info, option, update, install, remove, version, restore},
+  keywordstyle  = [1]{\bfseries},
+  keywordstyle  = [2]{\color{azure4}},
+  moredelim     = [s][\color{green5}]{-}{\ },
+  morecomment   = [l][\color{gray6}\itshape]{\#},
+  numbers     = left,
+  numberstyle = \tiny\ttfamily,
+}
+\lstdefinelanguage{mylatex}{
+  language={[LaTeX]TeX},
+  texcsstyle=*\color{azure4}\bfseries,
+  keywordstyle=\color{green5}\bfseries,
+  morekeywords={document},
+  moretexcs={usepackage, documentclass}
+}
+
+\lstnewenvironment{cmdcode}{\lstset{language=cmd, frame=single}}{}
+
+\NewDocumentCommand \cmd { } {\lstinline[language=cmd]}
+
+\NewDocumentCommand \lcmd { } {\lstinline[language=mylatex]}
+
+\NewDocumentCommand \frameaction { } 
+  { \texttt }
+
+\NewDocumentCommand \pkg { } { \lstinline }
+% \newcommand{\lcmd}{\lstinline[language=mylatex]}
+
+\NewDocumentCommand \tlmgr { } { \texttt{tlmgr} }
+
+\usepackage[os=win]{menukeys}
+\usepackage{fontawesome5}
+
+\NewDocumentCommand \win { } { \faWindows }
+\NewDocumentCommand \texlive { } { \TeX{} Live }
