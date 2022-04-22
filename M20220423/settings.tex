@@ -1,7 +1,7 @@
 % \usefonttheme{serif}
 % \geometry{paperwidth=140mm,paperheight=105mm}
 
-\RequirePackage[no-math]{fontspec}
+\usepackage[no-math]{fontspec}
 % \setmainfont{texgyretermes}[
 %   UprightFont = *-regular ,
 %   BoldFont = *-bold ,
@@ -70,9 +70,9 @@
 \setbeamerfont{section in toc}{family=\heiti\sffamily}
 \setbeamerfont{myTOC}{}
 \AtBeginSection[]{\frame{\frametitle{目录}%
-                  \usebeamerfont{myTOC}\tableofcontents[current]}}
+                  \usebeamerfont{myTOC}\tableofcontents[currentsection, hideallsubsections]}}
 
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{4}
 \makeatletter
 \setbeamertemplate{frametitle}[default][left,leftskip=\the\dimexpr\beamer@leftmargin-0.6cm\relax]
 \makeatother
@@ -112,7 +112,8 @@
   morekeywords  = [1]
     {
       tlmgr, pdflatex, latexmk, xelatex, cd, dir, mkdir, 
-      ls, del, rm, mv, move, cp, copy, code
+      ls, del, rm, mv, move, cp, copy, code, bibtex, biber,
+      texdoc, kpsewhich, texhash
     },
   morekeywords  = [2]{action, info, option, update, install, remove, version, restore},
   keywordstyle  = [1]{\bfseries},
@@ -124,13 +125,24 @@
 }
 \lstdefinelanguage{mylatex}{
   language={[LaTeX]TeX},
-  texcsstyle=*\color{azure4}\bfseries,
+  texcsstyle  =*\color{azure4}\bfseries,
   keywordstyle=\color{green5}\bfseries,
   morekeywords={document},
-  moretexcs={usepackage, documentclass}
+  morecomment = [l][\color{gray6}\itshape]{\%},
+  moretexcs   =
+    {
+      usepackage, documentclass, LaTeX, LaTex, label, ref, tableofcontents, begin, end, bibliography, bibliographystyle, cite, NeedsTeXFormat, ProvidesPackage, newcommand, mycmd
+    }
+}
+\lstdefinestyle{output}{
+  basicstyle=\tiny\ttfamily, frame=single,
 }
 
 \lstnewenvironment{cmdcode}{\lstset{language=cmd, frame=single}}{}
+
+\lstnewenvironment{latexcode}{\lstset{language=mylatex, frame=single}}{}
+
+\lstnewenvironment{outputcode}{\lstset{style=output}}{}
 
 \NewDocumentCommand \cmd { } {\lstinline[language=cmd]}
 
@@ -149,3 +161,8 @@
 
 \NewDocumentCommand \win { } { \faWindows }
 \NewDocumentCommand \texlive { } { \TeX{} Live }
+
+\AtEndPreamble{
+  % \usepackage{hyperref}
+  \hypersetup{colorlinks=true, linkcolor=mDarkTeal}
+  }
