@@ -45,8 +45,8 @@
   \uncover<7>{后面我们提到终端, 命令行均指这些东西, 并不做名字上的区分}
 \end{frame}
 
-\section{\tlmgr 的使用}
-\subsection{\tlmgr 的简单介绍}
+\section{\texorpdfstring{\tlmgr}{tlmgr} 的使用}
+\subsection{\texorpdfstring{\tlmgr}{tlmgr} 的简单介绍}
 \begin{frame}[fragile]
   \frametitle{\tlmgr 的介绍}
   \begin{itemize}
@@ -54,23 +54,24 @@
     \item \emph{软件包}指的不只是可以通过 \lcmd{\usepackage} 调用的宏包, 而是所有 \texlive 包含的, 可以使用 \tlmgr 管理的内容, 比如平常所说的宏包, 如 \lstinline{amsmath.sty}, 一些说明文档, 如 \lstinline{lshort-zh-cn}, 一些可执行文件, 如 \lstinline{xetex.exe} 等等.
     \item \tlmgr 是 \textbf{T}eX\textbf{L}ive \textbf{M}ana\textbf{g}e\textbf{r} 的缩写;
     \item 命令行中运行 \cmd{tlmgr version} 就可以看到当前的\emph{修订版号}(revision), 通常输出如下
-\begin{lstlisting}
+\begin{outputcode}
 tlmgr revision 63033 (2022-04-15 07:19:42 +0200)
 tlmgr using installation: C:/texlive/2022
 TeX Live (https://tug.org/texlive) version 2022
-\end{lstlisting}
+\end{outputcode}
   \end{itemize}
 \end{frame}
 
-\subsection{\tlmgr 的基本语法}
+\subsection{\texorpdfstring{\tlmgr}{tlmgr} 的基本语法}
 
 \begin{frame}[fragile]
   \frametitle{\tlmgr 的基本语法}
 \begin{cmdcode}
-tlmgr --global-options action --action-specific-options operand
+tlmgr -global-options action -action-specific-options operand
 \end{cmdcode}
 \begin{enumerate}
   \item \cmd{-} 与 \cmd{--} 相同;
+  \item 顺序不重要;
   \item \cmd{-dry-run}.
 \end{enumerate}
 \end{frame}
@@ -84,7 +85,7 @@ tlmgr --global-options action --action-specific-options operand
 \begin{cmdcode}
 tlmgr update -list
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily,frame=single]<1>
+\begin{outputcode}<1>
 tlmgr.pl: package repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet (not verified: gpg unavailable)
 tlmgr.pl: would save backups to C:/texlive/2022/tlpkg/backups
 tlmgr.pl: skipping forcibly removed package: collection-texworks
@@ -97,14 +98,14 @@ update:   texlive-scripts [504k]: local:  63049, source:  63068
 update:   utfsym         [4766k]: local:  56729, source:  63076
 update:   xduts          [871k]: local:  63013, source:  63075
 update:   zwpagelayout   [641k]: local:  53965, source:  63074  
-\end{lstlisting}
+\end{outputcode}
   \end{onlyenv}
   \framesubtitle<2>{更新全部软件包}
   \begin{onlyenv}<2>
 \begin{cmdcode}
 tlmgr update -self -all
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily,frame=single]
+\begin{outputcode}
 tlmgr.pl: package repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet (not verified: gpg unavailable)
 tlmgr.pl: saving backups to C:/texlive/2022/tlpkg/backups
 tlmgr.pl: no self-updates for tlmgr available
@@ -120,7 +121,7 @@ running updmap-sys ...
 ...
 tlmgr.pl: package log updated: C:/texlive/2022/texmf-var/web2c/tlmgr.log
 tlmgr.pl: command log updated: C:/texlive/2022/texmf-var/web2c/tlmgr-commands.log
-\end{lstlisting}
+\end{outputcode}
   \end{onlyenv}
   \framesubtitle<3>{其他的功能}
   \begin{enumerate}[<3->]
@@ -149,7 +150,7 @@ tlmgr update -self -all -reinstall-forcibly-removed
 \begin{cmdcode}
 tlmgr info pkg1 pkg2
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily,frame=single]
+\begin{outputcode}
 package:     ctex
 category:    Package
 shortdesc:   LaTeX classes and packages for Chinese typesetting
@@ -166,7 +167,7 @@ cat-contact-support: https://github.com/CTeX-org/ctex-kit/issues
 cat-contact-repository: https://github.com/CTeX-org/ctex-kit
 cat-contact-home: http://www.ctex.org/HomePage
 collection:  collection-langchinese
-\end{lstlisting}
+\end{outputcode}
   \end{onlyenv}
 
   \framesubtitle<2>{查看软件包的文件信息}
@@ -174,7 +175,7 @@ collection:  collection-langchinese
 \begin{cmdcode}
 tlmgr info -list pkg1 pkg2
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily,frame=single]
+\begin{outputcode}
 # 省略 tlmgr info tabularray 的内容 #
 Included files, by type:
 run files:
@@ -184,7 +185,7 @@ doc files:
 texmf-dist/doc/latex/tabularray/README.txt details="Readme"
 texmf-dist/doc/latex/tabularray/tabularray.pdf details="Package documentation"
 texmf-dist/doc/latex/tabularray/tabularray.tex  
-\end{lstlisting}
+\end{outputcode}
   \end{onlyenv}
 \end{frame}
 
@@ -198,10 +199,10 @@ texmf-dist/doc/latex/tabularray/tabularray.tex
 \begin{cmdcode}
 tlmgr restore pkg
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily, frame=single]
+\begin{outputcode}
 tlmgr restore functional
 Available backups for functional: 62926 (2022-04-17 11:15)
-\end{lstlisting}
+\end{outputcode}
   % \end{onlyenv}
   \framesubtitle<2>{将某个软件包回滚为备份}
 
@@ -209,7 +210,7 @@ Available backups for functional: 62926 (2022-04-17 11:15)
 \begin{cmdcode}
 tlmgr restore pkg revision
 \end{cmdcode}
-\begin{lstlisting}[basicstyle=\tiny\ttfamily, frame=single]
+\begin{outputcode}
 tlmgr restore functional 62926
 Do you really want to restore functional to revision 62926 (y/N): y
 Restoring functional, 62926 from C:/texlive/2022/tlpkg/backups/functional.r62926.tar.xz
@@ -219,11 +220,11 @@ running mtxrun --generate ...
 done running mtxrun --generate.
 tlmgr.pl: package log updated: C:/texlive/2022/texmf-var/web2c/tlmgr.log
 tlmgr.pl: command log updated: C:/texlive/2022/texmf-var/web2c/tlmgr-commands.log
-\end{lstlisting}
+\end{outputcode}
 \end{uncoverenv}
 \end{frame}
 
-\subsection{修改 \tlmgr 的设置}
+\subsection{修改 \texorpdfstring{\tlmgr}{tlmgr} 的设置}
 
 \begin{frame}[fragile]
   \frametitle{修改 \tlmgr 的设置 --- 操作: \frameaction{option}}
@@ -269,7 +270,274 @@ tlmgr option repository mirror
 \end{frame}
 
 \subsection{使用命令行编译 \LaTeX 文件}
+\subsubsection{第一次编译}
+
+\begin{frame}[fragile]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{第一次编译}
+\begin{onlyenv}<1,2>
+  \begin{enumerate}[<+->]
+    \item 在 \directory{D:/folder} 文件夹下新建 \directory{main.tex}, 输入以下内容
+\begin{latexcode}
+\documentclass{article}
+\begin{document}
+  Hello \LaTeX!
+\end{document}  
+\end{latexcode}
+    \item 在命令行中运行 
+\begin{cmdcode}
+pdflatex main.tex
+\end{cmdcode}
+\begin{outputcode}
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex)
+restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24>
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/base/size10.clo))
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.
+def) (./main.aux) [1{/home/syvshclily/texlive/2022/texmf-var/fonts/map/pdftex/u
+pdmap/pdftex.map}] (./main.aux) )</home/syvshclily/texlive/2022/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on main.pdf (1 page, 12962 bytes).
+Transcript written on main.log. 
+\end{outputcode}
+  \end{enumerate}  
+\end{onlyenv}
+\begin{onlyenv}<3>
+  \begin{itemize}
+    \item \directory{main.aux}: 辅助文件;
+    \item \directory{main.log}: 日志文件;
+    \item \directory{main.pdf}: 输出的 PDF 文件.
+  \end{itemize}
+\end{onlyenv}
+\end{frame}
+
+\subsubsection{遇到错误}
+
+\begin{frame}[fragile]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{遇到错误}
+\begin{onlyenv}<1-2>
+  \begin{enumerate}[<+->]
+    \item \lcmd{\LaTeX} $ \Rightarrow $ \lcmd{\LaTex}
+    \item 在命令行中运行
+\begin{cmdcode}
+pdflatex main.tex
+\end{cmdcode}
+\begin{outputcode}
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex)
+restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24>
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/base/size10.clo))
+(/home/syvshclily/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.
+def) (./main.aux)
+! Undefined control sequence.
+l.3   Hello \Latex
+                  !
+?  
+\end{outputcode}
+  \end{enumerate}  
+\end{onlyenv}
+\begin{onlyenv}<3>
+  \begin{itemize}
+    \item \keys{I + <cs> + \enter};
+    \item \keys{X + \enter};
+    \item \keys{H + \enter}.
+  \end{itemize}
+\end{onlyenv}
+\end{frame}
+
+\subsubsection{编译选项}
+
+\begin{frame}[fragile]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{编译选项}
+
+\begin{cmdcode}
+pdflatex --option1 --option2=<string> main.tex
+\end{cmdcode}
+  
+\begin{enumerate}[<+->]
+  \item \cmd{--halt-on-error}
+  \item \cmd{--interactionmode=<errorstop|scroll|batch|nonstop>mode}
+  \item \cmd{--synctex=1}
+  \item \cmd{--jobname=<string>}
+  \item \cmd{--output-directory=<string>}
+  \item \cmd{--shell-escape}
+\end{enumerate}
+\end{frame}
+
+\subsubsection{多次编译}
+
+\begin{frame}[fragile,t]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{目录与交叉引用}
+\begin{latexcode}
+% main.tex
+\documentclass{article}
+\begin{document}
+\tableofcontents
+\section{One}\label{sec:one}
+  We are in section \ref{sec:one}
+\end{document}
+\end{latexcode}
+\only<2>{
+  \begin{center}
+    \includegraphics[height=3cm]{cross-ref.png}
+  \end{center}
+}
+\begin{onlyenv}<3>
+\begin{latexcode}
+% main.aux
+\relax 
+\@writefile{toc}{\contentsline {section}{\numberline {1}One}{1}{}\protected@file@percent }
+\newlabel{sec:one}{{1}{1}}
+\gdef \@abspage@last{1}
+% main.toc
+\contentsline {section}{\numberline {1}One}{1}{}%
+\end{latexcode}  
+\end{onlyenv}
+\only<4>{
+  \begin{center}
+    \includegraphics[height=3cm]{cross-ref-right.png}
+  \end{center}
+}
+\end{frame}
+
+\subsubsection{参考文献}
+
+\begin{frame}[fragile, t]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{参考文献}
+
+\begin{latexcode}
+\documentclass{article}
+\begin{document}
+  text\cite{article-full}
+  \bibliographystyle{plain}
+  \bibliography{xampl.bib}
+\end{document}
+\end{latexcode}
+
+\begin{onlyenv}<2>
+\begin{cmdcode}
+pdflatex main.tex
+bibtex main.aux
+pdflatex main.tex
+pdflatex main.tex
+\end{cmdcode}  
+\end{onlyenv}
+
+\begin{onlyenv}<3>
+  \begin{center}
+    \includegraphics[width=\textwidth]{bib-ref.png}
+  \end{center}
+\end{onlyenv}
+\end{frame}
+
+\subsubsection{更强大的工具: \texttt{latexmk}}
+
+\begin{frame}[fragile, t]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{更强大的工具: \texttt{latexmk}}
+
+\begin{latexcode}
+% main.tex
+\documentclass{article}
+\begin{document}
+\tableofcontents
+\section{One}\label{sec:one}
+  We are in section \ref{sec:one}, 
+  and we have a cite \cite{article-full}
+  \bibliographystyle{plain}
+  \bibliography{xampl.bib}
+\end{document}
+\end{latexcode}
+
+\begin{cmdcode}
+latexmk -pdf main.tex
+\end{cmdcode}
+\end{frame}
+
+\subsubsection{更多}
 
 \begin{frame}
   \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{更多的内容}
+  更多内容可以参见
+  \begin{itemize}
+    \item \texttt{\textbf{texdoc} latexmk}
+    \item \cmd{pdflatex --help}
+    \item \href{https://syvshc.github.io/2022-03-06-latex-terminal-compiling/}{在终端中编译 \LaTeX}
+  \end{itemize}
+\end{frame}
+
+\section{安装外部宏包}
+\subsection{检查宏包是否安装}
+
+\begin{frame}[fragile]
+  \frametitle{安装外部宏包}
+  \framesubtitle{检查一个宏包是否被安装了}
+\begin{cmdcode}
+tlmgr info pkg
+# or 
+kpsewhich pkg.sty
+\end{cmdcode}
+\end{frame}
+
+\begin{frame}[fragile, t]
+  \frametitle{安装外部宏包}
+  \framesubtitle{手动安装宏包}
+\begin{onlyenv}<1>
+\begin{latexcode}
+% mypackage.sty
+\NeedsTeXFormat{LaTeX2e}[2017/04/15]
+\ProvidesPackage{mypackage}[2022/4/20 v1.0 test]
+\newcommand{\mycmd}{Hello \LaTeX}  
+\end{latexcode}
+\end{onlyenv}
+\begin{onlyenv}<2->
+  \begin{enumerate}
+    \item 在 \directory{C:/texlive/texmf-local/tex/latex} 文件夹下新建文件夹 \directory{mypackage};
+    \item 将 \texttt{mypackage.sty} 放进去;
+    \item 命令行运行 \cmd{texhash}.
+  \begin{outputcode}
+  texhash: Updating C:/texlive/texmf-local/ls-R...
+  texhash: Updated C:/texlive/texmf-local/ls-R.
+  texhash: Updating C:/texlive/2022/texmf-config/ls-R...
+  texhash: Updated C:/texlive/2022/texmf-config/ls-R.
+  texhash: Updating C:/texlive/2022/texmf-var/ls-R...
+  texhash: Updated C:/texlive/2022/texmf-var/ls-R.
+  texhash: Updating C:/texlive/2022/texmf-dist/ls-R...
+  texhash: Updated C:/texlive/2022/texmf-dist/ls-R.
+  texhash: Done.
+  \end{outputcode}
+  \end{enumerate}
+\end{onlyenv}
+\begin{onlyenv}<1, 3>
+\begin{latexcode}
+% main.tex
+\documentclass{article}
+\usepackage{mypackage}
+\begin{document}
+  \mycmd
+\end{document}
+\end{latexcode}
+\end{onlyenv}
+\end{frame}
+
+\section{配置 VSCode 的编译链}
+
+\begin{frame}
+  \frametitle{配置 VSCode 的编译链}
+  由于内容中演示居多, 这里只给出一个 \href{https://gitee.com/xkwxdyy/CCNUthesis/wikis/\%E5\%B8\%B8\%E8\%A7\%81\%E9\%97\%AE\%E9\%A2\%98FAQ/\%E5\%A6\%82\%E4\%BD\%95\%E5\%AE\%89\%E8\%A3\%85\%E3\%80\%81\%E9\%85\%8D\%E7\%BD\%AE\%E5\%92\%8C\%E4\%BD\%BF\%E7\%94\%A8VScode\#config-LW}{Wiki}. 
 \end{frame}
