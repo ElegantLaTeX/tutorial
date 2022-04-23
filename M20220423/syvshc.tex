@@ -261,10 +261,6 @@ tlmgr option repository mirror
   \begin{enumerate}[<+->]
     \item \cmd{cd};
     \item \cmd{dir} (Windows), \cmd{ls} (Linux, macOS);
-    \item \cmd{mkdir};
-    \item \cmd{del} (Windos), \cmd{rm} (Linux, macOS);
-    \item \cmd{move} (Windos), \cmd{mv} (Linux, macOS);
-    \item \cmd{copy} (Windos), \cmd{cp} (Linux, macOS);
     \item \cmd{code}
   \end{enumerate}
 \end{frame}
@@ -349,7 +345,7 @@ l.3   Hello \Latex
 \end{onlyenv}
 \begin{onlyenv}<3>
   \begin{itemize}
-    \item \keys{I + <cs> + \enter};
+    \item \keys{I + $ \langle \text{cs} \rangle $  + \enter};
     \item \keys{X + \enter};
     \item \keys{H + \enter}.
   \end{itemize}
@@ -367,12 +363,11 @@ pdflatex --option1 --option2=<string> main.tex
 \end{cmdcode}
   
 \begin{enumerate}[<+->]
-  \item \cmd{--halt-on-error}
-  \item \cmd{--interactionmode=<errorstop|scroll|batch|nonstop>mode}
-  \item \cmd{--synctex=1}
-  \item \cmd{--jobname=<string>}
-  \item \cmd{--output-directory=<string>}
-  \item \cmd{--shell-escape}
+  \item \cmd{--synctex=1}: 源文件与 PDF 互相跳转
+  \item \cmd{--jobname=<string>}: 为输出文件起别名
+  \item \cmd{--output-directory=<string>}: 设置输出文件的位置
+  \item \cmd{--shell-escape}: 允许 \cmd{pdf(xe)latex} 调用外部程序
+  \item \cmd{--interactionmode=<errorstop|scroll|batch|nonstop>mode}: 遇到错误的时候如何处理
 \end{enumerate}
 \end{frame}
 
@@ -417,8 +412,10 @@ pdflatex --option1 --option2=<string> main.tex
 
 \begin{frame}[fragile, t]
   \frametitle{使用命令行编译 \LaTeX 文件}
-  \framesubtitle{参考文献}
+  \framesubtitle<1-3>{参考文献 --- \texttt{bibtex}}
 
+
+\begin{onlyenv}<1-3>
 \begin{latexcode}
 \documentclass{article}
 \begin{document}
@@ -427,6 +424,7 @@ pdflatex --option1 --option2=<string> main.tex
   \bibliography{xampl.bib}
 \end{document}
 \end{latexcode}
+\end{onlyenv}
 
 \begin{onlyenv}<2>
 \begin{cmdcode}
@@ -439,9 +437,39 @@ pdflatex main.tex
 
 \begin{onlyenv}<3>
   \begin{center}
-    \includegraphics[width=\textwidth]{bib-ref.png}
+    \includegraphics[width=\textwidth]{bibtex-ref.png}
   \end{center}
 \end{onlyenv}
+
+\framesubtitle<4->{参考文献 --- \texttt{biber}}
+
+\begin{onlyenv}<4->
+\begin{latexcode}
+\documentclass{article}
+\usepackage{biblatex}
+\addbibresource{xampl.bib}
+\begin{document}
+  text\cite{article-full}
+  \printbibliography
+\end{document}  
+\end{latexcode}
+\end{onlyenv}
+
+\begin{onlyenv}<5>
+\begin{cmdcode}
+pdflatex main.tex
+biber main.bcf
+pdflatex main.tex
+pdflatex main.tex
+\end{cmdcode}
+\end{onlyenv}
+
+\begin{onlyenv}<6>
+  \begin{center}
+    \includegraphics[width=\textwidth]{biber-ref.png}
+  \end{center}
+\end{onlyenv}
+
 \end{frame}
 
 \subsubsection{更强大的工具: \texttt{latexmk}}
@@ -449,7 +477,7 @@ pdflatex main.tex
 \begin{frame}[fragile, t]
   \frametitle{使用命令行编译 \LaTeX 文件}
   \framesubtitle{更强大的工具: \texttt{latexmk}}
-
+\begin{onlyenv}<1>
 \begin{latexcode}
 % main.tex
 \documentclass{article}
@@ -466,6 +494,34 @@ pdflatex main.tex
 \begin{cmdcode}
 latexmk -pdf main.tex
 \end{cmdcode}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+\begin{latexcode}
+% main.tex
+\documentclass{ctexart}
+\usepackage[style=gb7714-2015]{biblatex}
+\addbibresource{xampl.bib}
+\begin{document}
+\tableofcontents
+\section{测试节}\label{sec:one}
+  我们现在是第 \ref{sec:one} 节，
+  我们有一个引用 \cite{article-full}
+  \printbibliography
+\end{document}
+\end{latexcode}
+
+\begin{cmdcode}
+latexmk -xelatex main.tex
+\end{cmdcode}
+\end{onlyenv}
+
+\begin{onlyenv}<3>
+\begin{itemize}
+  \item \cmd{latexmk -c}, \cmd{latexmk -C};
+  \item \texttt{latexmkrc} 文件.
+\end{itemize}
+\end{onlyenv}
 \end{frame}
 
 \subsubsection{更多}
