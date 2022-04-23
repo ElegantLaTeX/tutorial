@@ -23,10 +23,6 @@
   \begin{enumerate}
     \item \cmd{cd};
     \item \cmd{dir} (Windows), \cmd{ls} (Linux, macOS);
-    \item \cmd{mkdir};
-    \item \cmd{del} (Windos), \cmd{rm} (Linux, macOS);
-    \item \cmd{move} (Windos), \cmd{mv} (Linux, macOS);
-    \item \cmd{copy} (Windos), \cmd{cp} (Linux, macOS);
     \item \cmd{code}
   \end{enumerate}
 \end{frame}
@@ -106,22 +102,52 @@ pdflatex --option1 --option2=<string> main.tex
 \end{cmdcode}
   
 \begin{enumerate}
-  \item \cmd{--halt-on-error}
-  \item \cmd{--interactionmode=<errorstop|scroll|batch|nonstop>mode}
   \item \cmd{--synctex=1}
   \item \cmd{--jobname=<string>}
   \item \cmd{--output-directory=<string>}
   \item \cmd{--shell-escape}
+  \item \cmd{--halt-on-error}
+  \item \cmd{--interactionmode=<errorstop|scroll|batch|nonstop>mode}
 \end{enumerate}
 \end{frame}
 
+\subsubsection{多次编译}
 
-\subsubsection{参考文献}
+\subsubsection{多次编译}
+
+\begin{frame}[fragile,t]
+  \frametitle{使用命令行编译 \LaTeX 文件}
+  \framesubtitle{目录与交叉引用}
+\begin{latexcode}
+% main.tex
+\documentclass{article}
+\begin{document}
+\tableofcontents
+\section{One}\label{sec:one}
+  We are in section \ref{sec:one}
+\end{document}
+\end{latexcode}
+
+\begin{onlyenv}<2>
+\begin{cmdcode}
+pdflatex main.tex
+pdflatex main.tex
+\end{cmdcode}  
+\end{onlyenv}
+
+\only<3>{
+  \begin{center}
+    \includegraphics[height=3cm]{cross-ref-right.png}
+  \end{center}
+}
+\end{frame}
+
 
 \begin{frame}[fragile, t]
   \frametitle{使用命令行编译 \LaTeX 文件}
-  \framesubtitle{参考文献}
+  \framesubtitle<1-3>{参考文献 --- \texttt{bibtex}}
 
+\begin{onlyenv}<1-3>
 \begin{latexcode}
 \documentclass{article}
 \begin{document}
@@ -130,6 +156,7 @@ pdflatex --option1 --option2=<string> main.tex
   \bibliography{xampl.bib}
 \end{document}
 \end{latexcode}
+\end{onlyenv}
 
 \begin{onlyenv}<2>
 \begin{cmdcode}
@@ -142,9 +169,39 @@ pdflatex main.tex
 
 \begin{onlyenv}<3>
   \begin{center}
-    \includegraphics[width=\textwidth]{bib-ref.png}
+    \includegraphics[width=\textwidth]{bibtex-ref.png}
   \end{center}
 \end{onlyenv}
+
+\framesubtitle<4-6>{参考文献 --- \texttt{biber}}
+
+\begin{onlyenv}<4-6>
+\begin{latexcode}
+\documentclass{article}
+\usepackage{biblatex}
+\addbibresource{xampl.bib}
+\begin{document}
+  text\cite{article-full}
+  \printbibliography
+\end{document}
+\end{latexcode}
+\end{onlyenv}
+
+\begin{onlyenv}<5>
+  \begin{cmdcode}
+  pdflatex main.tex
+  biber main.bcf
+  pdflatex main.tex
+  pdflatex main.tex
+  \end{cmdcode}  
+  \end{onlyenv}
+  
+  \begin{onlyenv}<6>
+    \begin{center}
+      \includegraphics[width=\textwidth]{biber-ref.png}
+    \end{center}
+  \end{onlyenv}
+
 \end{frame}
 
 \subsubsection{更强大的工具: \texttt{latexmk}}
@@ -153,6 +210,26 @@ pdflatex main.tex
   \frametitle{使用命令行编译 \LaTeX 文件}
   \framesubtitle{更强大的工具: \texttt{latexmk}}
 
+\begin{onlyenv}<1>
+\begin{latexcode}
+% main.tex
+\documentclass{article}
+\begin{document}
+\tableofcontents
+\section{One}\label{sec:one}
+  We are in section \ref{sec:one}, 
+  and we have a cite \cite{article-full}
+  \bibliographystyle{plain}
+  \bibliography{xampl.bib}
+\end{document}
+\end{latexcode}
+
+\begin{cmdcode}
+latexmk -pdf main.tex
+\end{cmdcode}
+\end{onlyenv}
+
+\begin{onlyenv}<2>  
 \begin{latexcode}
 % main.tex
 \documentclass{ctexart}
@@ -170,7 +247,7 @@ pdflatex main.tex
 \begin{cmdcode}
 latexmk -xelatex main.tex
 \end{cmdcode}
-
+\end{onlyenv}
 
 \end{frame}
 
@@ -200,14 +277,15 @@ latexmk -xelatex main.tex
   \item \emph{软件包}指的不只是可以通过 \lcmd{\usepackage} 调用的宏包, 而是所有 \texlive 包含的, 可以使用 \tlmgr 管理的内容, 比如平常所说的宏包, 如 \lstinline{amsmath.sty}, 一些说明文档, 如 \lstinline{lshort-zh-cn}, 一些可执行文件, 如 \lstinline{xetex.exe} 等等.
   \item \tlmgr 是 \textbf{T}eX\textbf{L}ive \textbf{M}ana\textbf{g}e\textbf{r} 的缩写;
   \item 命令行中运行 \cmd{tlmgr version} 就可以看到当前的\emph{修订版号}(revision), 通常输出如下
-  \begin{outputcode}
-  tlmgr revision 63033 (2022-04-15 07:19:42 +0200)
-  tlmgr using installation: C:/texlive/2022
-  TeX Live (https://tug.org/texlive) version 2022
-  \end{outputcode}
+\begin{outputcode}
+tlmgr revision 63033 (2022-04-15 07:19:42 +0200)
+tlmgr using installation: C:/texlive/2022
+TeX Live (https://tug.org/texlive) version 2022
+\end{outputcode}
 \end{itemize}
 \end{frame}
 
+\subsection{\texttt{tlmgr} 的基本语法}
 
 \begin{frame}[fragile]{\tlmgr 的基本语法}
 \begin{cmdcode}
@@ -220,49 +298,58 @@ tlmgr -global-options action -action-specific-options operand
 \end{enumerate}
 \end{frame}
 
-
-\begin{frame}[fragile]{查看宏包文件信息 --- 操作: \frameaction{info}}
-
-\begin{cmdcode}
-tlmgr info -list pkg1 pkg2
-\end{cmdcode}
-\begin{outputcode}
-# 省略 tlmgr info tabularray 的内容 #
-Included files, by type:
-run files:
-texmf-dist/tex/latex/tabularray/tabularray-2021.sty
-texmf-dist/tex/latex/tabularray/tabularray.sty
-doc files:
-texmf-dist/doc/latex/tabularray/README.txt details="Readme"
-texmf-dist/doc/latex/tabularray/tabularray.pdf details="Package documentation"
-texmf-dist/doc/latex/tabularray/tabularray.tex  
-\end{outputcode}
-\end{frame}
-
+\subsection{查看宏包信息}
 
 \begin{frame}[fragile]{查看宏包说明信息 --- 操作: \frameaction{info}}
 \begin{cmdcode}
 tlmgr info pkg1 pkg2
 \end{cmdcode}
-\begin{outputcode}
-package:     ctex
+  \begin{outputcode}
+package:     elegantbook
 category:    Package
-shortdesc:   LaTeX classes and packages for Chinese typesetting
-longdesc:    ctex is a collection of macro packages and document classes for LaTeX Chinese typesetting.
+shortdesc:   An Elegant LaTeX Template for Books
+longdesc:    ElegantBook is designed for writing Books. This template is based on the standard LaTeX book class. The goal of this template is to make the writing process more elegant. Just enjoy it!
 installed:   Yes
-revision:    61285
-sizes:       src: 481k, doc: 1137k, run: 1753k
+revision:    62989
+sizes:       doc: 2613k, run: 49k
 relocatable: No
-cat-version: 2.5.8
+cat-version: 4.3
 cat-license: lppl1.3c
-cat-topics:  chinese book-pub class
-cat-contact-bugs: https://github.com/CTeX-org/ctex-kit/issues
-cat-contact-support: https://github.com/CTeX-org/ctex-kit/issues
-cat-contact-repository: https://github.com/CTeX-org/ctex-kit
-cat-contact-home: http://www.ctex.org/HomePage
-collection:  collection-langchinese
+cat-topics:  class chinese book-pub
+cat-contact-home: https://elegantlatex.org/
+cat-contact-announce: https://elegantlatex.org/
+cat-contact-repository: https://github.com/ElegantLaTeX/ElegantBook
+cat-contact-support: https://github.com/ElegantLaTeX/ElegantBook/issues
+collection:  collection-latexextra
+  \end{outputcode}
+  \end{frame}
+
+\begin{frame}[fragile]{查看宏包说明信息 --- 操作: \frameaction{info}}
+
+\begin{cmdcode}
+tlmgr info -list pkg1 pkg2
+\end{cmdcode}
+\begin{outputcode}
+# 省略 tlmgr info elegantbook 的内容 #
+Included files, by type:
+run files:
+  texmf-dist/tex/latex/elegantbook/elegantbook.cls
+doc files:
+  texmf-dist/doc/latex/elegantbook/License
+  texmf-dist/doc/latex/elegantbook/README-CN.md
+  texmf-dist/doc/latex/elegantbook/README.md details="Readme"
+  texmf-dist/doc/latex/elegantbook/elegantbook-cn.pdf details="Package documentation (Chinese)" language="zh"
+  texmf-dist/doc/latex/elegantbook/elegantbook-cn.tex
+  texmf-dist/doc/latex/elegantbook/elegantbook-en.pdf details="Package documentation (English)"
+  texmf-dist/doc/latex/elegantbook/elegantbook-en.tex
+  texmf-dist/doc/latex/elegantbook/figure/cover.jpg
+  texmf-dist/doc/latex/elegantbook/figure/logo-blue.png
+  texmf-dist/doc/latex/elegantbook/image/founder.png
+  texmf-dist/doc/latex/elegantbook/image/scatter.jpg
+  texmf-dist/doc/latex/elegantbook/reference.bib
 \end{outputcode}
 \end{frame}
+
 
 \begin{frame}[fragile]{修改宏包更新源 --- 操作: \frameaction{option}}
 
@@ -350,8 +437,8 @@ tlmgr update -self -all -reinstall-forcibly-removed
 tlmgr restore pkg
 \end{cmdcode}
 \begin{outputcode}
-tlmgr restore functional
-Available backups for functional: 62926 (2022-04-17 11:15)
+tlmgr restore elegantbook
+Available backups for elegantbook: 59053 (2022-04-11 09:12)
 \end{outputcode}
   % \end{onlyenv}
   \framesubtitle<2>{将某个软件包回滚为备份}
@@ -361,9 +448,9 @@ Available backups for functional: 62926 (2022-04-17 11:15)
 tlmgr restore pkg revision
 \end{cmdcode}
 \begin{outputcode}
-tlmgr restore functional 62926
-Do you really want to restore functional to revision 62926 (y/N): y
-Restoring functional, 62926 from C:/texlive/2022/tlpkg/backups/functional.r62926.tar.xz
+tlmgr restore elegantbook 59053
+Do you really want to restore elegantbook to revision 59053 (y/N): y
+Restoring elegantbook, 59053 from C:/texlive/2022/tlpkg/backups/elegantbook.r59053.tar.xz
 running mktexlsr ...
 done running mktexlsr.
 running mtxrun --generate ...
@@ -407,7 +494,7 @@ kpsewhich pkg.sty
     \ProvidesPackage{mypackage}[2022/4/20 v1.0 test]
     \newcommand{\mycmd}{Hello \LaTeX}  
     \end{latexcode}
-  \item 在 \directory{C:/texlive/texmf-local/tex/latex} 文件夹下新建文件夹 \directory{mypackage};
+  \item 在 \directory{C:/texlive/texmf-local/tex/latex/local} 文件夹下新建文件夹 \directory{mypackage};
   \item 将 \texttt{mypackage.sty} 放进去;
   \item 命令行运行 \cmd{texhash}.
   \item 调用该宏包：
