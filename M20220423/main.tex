@@ -1,12 +1,19 @@
-\documentclass[9pt]{beamer}
+\documentclass[8pt]{beamer}
 
 \input{settings.tex}
 
 \author{ddswhu, syvshc, sikouhjw, osbertwang}
 \title{Elegant\LaTeX{} 分享会}
-\subtitle{模板使用初级入门}
+\subtitle{模板使用介绍}
 \institute{ElegantLaTeX Program}
 \date{2022/04/23}
+
+
+\titlegraphic{%
+  \begin{picture}(0,0)
+    \put(50, -5){\makebox(0,0)[rt]{\includegraphics[width=1.2cm]{logo.png}}}
+    \put(280,-150){\makebox(0,0)[rt]{\includegraphics[width=2cm]{logo-blue.png}}}
+  \end{picture}}
 
 \begin{document}
 
@@ -15,6 +22,7 @@
 
 \begin{frame}\frametitle{目录}
 \tableofcontents[hideallsubsections]
+
 \end{frame}
 
 
@@ -39,26 +47,25 @@ Elegant\LaTeX{} 项目组由 \textcolor{iron}{ddswhu} 和\textcolor{iron}{小 L}
 \begin{frame}{人员介绍}
   \begin{itemize}
     \item \textcolor{iron}{\bfseries 邓东升}：复旦大学经济学博士，又名 \underline{ddswhu}、\underline{EthanDeng}，Elegant\LaTeX{} 的创立者和维护者。2010 年开始接触使用 \LaTeX{}。国内最早 Sublime Text 和 VS Code 推广者之一。\\[2ex]
+    \item \textcolor{iron}{\bfseries 王然}：中国科学院大学博士后，又名\underline{啸行}，\underline{ObsertWang}。目前负责维护 install-latex-guide-zh-cn 手册，曾参加过 Overleaf 公司 Advisor 项目，对多种编辑器、版本和 Overleaf 非常熟悉。
     \item \textcolor{iron}{\bfseries 孙忠豪}：中科院数学与系统研究院硕士，又名\underline{乙醇}，\underline{syvshc}，Elegant\LaTeX{} 成员，HITBeamer 模板（哈工大）开发者和维护者，活跃在 QQ 用户群和 Github，校对翻译过 \TeX{} Live 包管理器的文档，热爱分享。\\[2ex]
     \item \textcolor{iron}{\bfseries 何骏炜}：广东工业大学硕士，又名\underline{死抠}，\underline{sikouhjw}，Elegant\LaTeX{} 成员，gdutthesis 开发者和维护者。自 2019 年开始在用户群群活跃，解答了 Github/知乎/LaTeXStudio.net/Stack Overflow 上诸多关于本模板的问题。\\[2ex]
-    \item \textcolor{iron}{\bfseries 王然}：中国科学院大学博士后，又名\underline{啸行}，\underline{ObsertWang}。目前负责维护 install-latex-guide-zh-cn 手册，曾参加过 Overleaf 公司 Advisor 项目，对多种编辑器、版本和 Overleaf 非常熟悉。
   \end{itemize}
 \end{frame}
 
 
-\begin{frame}{使用须知-适合}
+\begin{frame}{使用须知-适合人群}
   \begin{itemize}
     \item 对 \LaTeX{} 有一定了解，能够正常使用;
     \item 不习惯用默认的 article、book 文类；
     \item 文稿中有较多的数学公式；
     \item 接受模板的大部分设定；
-    \item 认可模板的审美；
-    \item 享受折腾。
+    \item 认可模板的审美。
   \end{itemize}  
 \end{frame}
 
 
-\begin{frame}{使用须知-不适合}
+\begin{frame}{使用须知-不适合人群}
   \begin{itemize}
     \item 无法自行编译文档；
     \item 自定义想法很多；
@@ -68,6 +75,15 @@ Elegant\LaTeX{} 项目组由 \textcolor{iron}{ddswhu} 和\textcolor{iron}{小 L}
   \end{itemize}  
 \end{frame}
 
+\section{Elegant\LaTeX{} 模板：本地与在线使用}
+
+\begin{frame}{本地使用：\TeX{} Live 2022 的安装}
+  演示。
+\end{frame}
+
+\begin{frame}{在线使用：Overleaf 在线使用}
+  演示。
+\end{frame}
 
 \input{syvshc.tex}
 \input{sikouhjw.tex}

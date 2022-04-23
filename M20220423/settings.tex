@@ -46,6 +46,7 @@
 \addtokomafont{labelinglabel}{\normalfont\bfseries}
 \usepackage{amsmath,amssymb}
 \usepackage{bookmark}
+\usepackage{lstautogobble}
 
 \usetheme[sectionpage=none]{metropolis}
 \setlength\abovecaptionskip{-1pt}
@@ -107,6 +108,7 @@
   prebreak    = {\mbox{$ \rhookswarrow $}},
   postbreak   = {\mbox{$ \lhookrightarrow $\quad}},
   breakindent = 10pt,
+  autogobble  = true,
 }
 \lstdefinelanguage{cmd}{
   morekeywords  = [1]
@@ -121,6 +123,7 @@
   moredelim     = [s][\color{green5}]{-}{\ },
   morecomment   = [l][\color{gray6}\itshape]{\#},
   numbers     = left,
+  autogobble  = true,
   numberstyle = \tiny\ttfamily,
 }
 \lstdefinelanguage{mylatex}{
@@ -128,6 +131,7 @@
   texcsstyle  =*\color{azure4}\bfseries,
   keywordstyle=\color{green5}\bfseries,
   morekeywords={document},
+  autogobble  = true,
   morecomment = [l][\color{gray6}\itshape]{\%},
   moretexcs   =
     {
@@ -135,14 +139,14 @@
     }
 }
 \lstdefinestyle{output}{
-  basicstyle=\tiny\ttfamily, frame=single,
+  basicstyle=\tiny\ttfamily, frame=single, autogobble  = true,
 }
 
-\lstnewenvironment{cmdcode}{\lstset{language=cmd, frame=single}}{}
+\lstnewenvironment{cmdcode}{\lstset{language=cmd, frame=single, autogobble=true}}{}
 
-\lstnewenvironment{latexcode}{\lstset{language=mylatex, frame=single}}{}
+\lstnewenvironment{latexcode}{\lstset{language=mylatex, frame=single, autogobble  = true,}}{}
 
-\lstnewenvironment{outputcode}{\lstset{style=output}}{}
+\lstnewenvironment{outputcode}{\lstset{style=output,autogobble  = true,}}{}
 
 \NewDocumentCommand \cmd { } {\lstinline[language=cmd]}
 

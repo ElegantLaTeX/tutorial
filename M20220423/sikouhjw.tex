@@ -1,19 +1,17 @@
 % !TeX root = main.tex
 
-\section{模板是什么}
+\section{发行版与模板}
 \begin{frame}{发行版与模板}
-  发行版与模板的关系是什么？\pause
 
-  首先我们要明确什么是发行版和模板。\pause
-
-  发行版：一个 \TeX 发行版是 \TeX 排版引擎、支持排版的文件（基本格式、\LaTeX 宏包、字体等）以
-  及一些辅助工具的集合。\pause
-
-  模板：模板本质上是一份实现特定目的、效果的代码，呈现形式一般为 cls（文档类）或者 sty（宏包）。模板具有以下特性：
   \begin{itemize}
-    \item 模板维护者需要撰写专门的文档和例子；
-    \item 普通用户应该能在阅读模板的使用说明后，较为自主地使用该模板；
-    \item 即使是模板，也只为「100\% 使用预定义样式」的使用场景提供便利。
+    \item \textbf{发行版}：一个 \TeX 发行版是 \TeX 排版引擎、支持排版的文件（基本格式、\LaTeX 宏包、字体等）以
+    及一些辅助工具的集合。\\[3ex]
+    \item \textbf{模板}：模板本质上是一份实现特定目的、效果的代码，呈现形式一般为 cls（文档类）或者 sty（宏包）。模板具有以下特性：
+    \begin{itemize}
+      \item 模板维护者需要撰写专门的文档和例子；
+      \item 普通用户应该能在阅读模板的使用说明后，较为自主地使用该模板；
+      \item 即使是模板，也只为「100\% 使用预定义样式」的使用场景提供便利。
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -26,40 +24,36 @@
     \item 用包管理器安装或升级。
   \end{enumerate}
 
-  也就是说，发行版里其实安装了很多模板。
-  
-  ElegantLaTeX 的模板在 TeX Live 2019 之后就收录进 TeX Live 里了，也就是说，如果你的发行版在 TeX Live 2019 之后，那么你本地发行版就是有模板的。
+  \textcolor{iron}{结论：} ElegantLaTeX 的模板在 TeX Live 2019 之后就收录进 TeX Live 里了，也就是说，如果你的发行版在 TeX Live 2019 之后，那么你本地发行版就是有模板的。
 
-  可以通过 \lstinline{kpsewhich elegantbook.cls}、\lstinline{texdoc -l elegantbook} 找到模板文件。
+  注：可以通过 \lstinline{kpsewhich elegantbook.cls}、\lstinline{texdoc -l elegantbook} 找到模板文件。
 \end{frame}
 
-\begin{frame}{那为什么还要下载最新版？}
-  模板是有很多版本的，一般来说是通过更新全部宏包来获取最新版模板。
-
-  在需要模板某些新功能的时候，也可以手动下载最新版模板，解压后使用。
-\end{frame}
-
-\section{模板基本使用}
-\begin{frame}{如何编译模板}
-  用 xelatex 编译。
-\end{frame}
-
-\begin{frame}[fragile]{模板手册}
-  命令行输入 \lstinline{texdoc elegantbook}。
-\end{frame}
-
-\begin{frame}{模板基础设置}
+\begin{frame}{Q\&A}
+  \textcolor{iron}{问题 1：那为什么还要下载最新版？}
   \begin{itemize}
-    \item 中文字体
-    \item 数学字体
-    \item 参考文献
+    \item 模板是有很多版本的，一般来说是通过更新全部宏包来获取最新版模板。
+    \item 在需要模板某些新功能的时候，也可以手动下载最新版模板，解压后使用。
+  \end{itemize}
+  \vspace*{4ex}
+  \textcolor{iron}{问题 2：如何获取模板手册？}
+  \begin{itemize}
+    \item 命令行输入 \lstinline{texdoc elegantbook};
+    \item Github：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{https://github.com/ElegantLaTeX/ElegantBook/releases}。
   \end{itemize}
 \end{frame}
 
-\begin{frame}{安装方正字体}
-  
-\end{frame}
+\section{模板使用简介}
 
-\begin{frame}[fragile]{字体相关命令}
-  \lstinline{fc-cache}、\lstinline{fc-list}。
+\begin{frame}{模板基础设置说明}
+  \begin{itemize}
+    \item 定理环境
+    \item 参考文献
+    \item 数学字体
+    \item 中文字体
+    \begin{itemize}
+      \item 字体安装见演示。
+      \item 字体命令：\lstinline{fc-cache} 和 \lstinline{fc-list}。
+    \end{itemize}
+  \end{itemize}
 \end{frame}
